@@ -1,7 +1,7 @@
-var deerResume = angular.module('deerResume', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
+var deerResume = angular.module('jasonsCV', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
 
-var baseurl = 'http://cvbox.sinaapp.com/'; // 使用SAE托管简历数据
-// var baseurl = 'data.php'; // 使用本地文件托管简历数据，本地模式下，不支持在线编辑
+//var baseurl = 'http://cvbox.sinaapp.com/'; // 使用SAE托管简历数据
+var baseurl = 'data.php'; // 使用本地文件托管简历数据，本地模式下，不支持在线编辑
 
 
 deerResume.config(['$routeProvider',
@@ -93,14 +93,6 @@ deerResume.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
           
     );
   };
-
-  // 请求云端数据，有三种情况：
-  // 1 云端没有任何记录，这个时候显示默认模板
-  // 2 云端已经存在数据，且设置有阅读密码，这时候提示输入密码
-  
-  // 右上角留入口
-
-
 });
 
 // ============
@@ -136,8 +128,6 @@ function post(path, params, method) {
             form.appendChild(hiddenField);
          }
     }
-
-
 
     form.submit();
 }
