@@ -1,10 +1,10 @@
-var deerResume = angular.module('jasonsCV', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
+var jasonsCV = angular.module('jasonsCV', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
 
 //var baseurl = 'http://cvbox.sinaapp.com/'; // 使用SAE托管简历数据
 var baseurl = 'data.php'; // 使用本地文件托管简历数据，本地模式下，不支持在线编辑
 
 
-deerResume.config(['$routeProvider',
+jasonsCV.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/admin', {
@@ -21,23 +21,21 @@ deerResume.config(['$routeProvider',
   }]);
 
 
-deerResume.controller('resumeCtrl', function ($scope,$http,storage) {
+jasonsCV.controller('resumeCtrl',  function ($scope,$http,storage) {
 
-  storage.bind($scope,'vpass');
+    storage.bind($scope,'vpass');
 
-  var url = '';
-  if( $scope.vpass && $scope.vpass.length > 3 )
-    url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
-  else 
-    url = baseurl+"?a=show&domain="+encodeURIComponent(window.location);
+    var url = '';
+    if( $scope.vpass && $scope.vpass.length > 3 ){
+        url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
+    }else{
+        url = baseurl+"?a=show&domain="+encodeURIComponent(window.location);
+    }
 
-  
-  $http.get(url).success(function( data ){
-      $scope.resume = data;
+    $http.get(url).success(function( data ){
+        $scope.resume = data;
+    });
 
-    }); 
-
-  
   $scope.password = function( vpass )
   {
     $scope.vpass = vpass;
@@ -46,12 +44,12 @@ deerResume.controller('resumeCtrl', function ($scope,$http,storage) {
 
 });
 
-deerResume.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
+jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
 
-  storage.bind($scope,'wpass');
-  storage.bind($scope,'vpass');
-  storage.bind($scope,'apass');
-  storage.bind($scope,'resume.content');
+    storage.bind($scope,'wpass');
+    storage.bind($scope,'vpass');
+    storage.bind($scope,'apass');
+    storage.bind($scope,'resume.content');
 
   var url = '';
   if( $scope.vpass && $scope.vpass.length > 3 )
