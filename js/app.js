@@ -28,8 +28,10 @@ jasonsCV.controller('resumeCtrl',  function ($scope,$http,storage) {
     var url = '';
     if( $scope.vpass && $scope.vpass.length > 3 ){
         url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
+        //url = baseurl+"?&vpass="+encodeURIComponent($scope.vpass);
     }else{
         url = baseurl+"?a=show&domain="+encodeURIComponent(window.location);
+        //url = baseurl;
     }
 
     $http.get(url).success(function( data ){
@@ -54,8 +56,10 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     var url = '';
     if( $scope.vpass && $scope.vpass.length > 3 ){
       url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
+//        url = baseurl+"?&vpass="+encodeURIComponent($scope.vpass);
     }else{
       url = baseurl+"?a=show&domain="+encodeURIComponent(window.location);
+//        url = baseurl;
     }
 
     $http.get(url).success(function( data ){

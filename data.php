@@ -9,13 +9,13 @@ $data['local'] = 1;
 
 
 if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass']) != $viewpass )
-{
+  {
 	$data['errno'] = '0';
 	$data['show'] = 0;
 	$data['title'] = '';
 	$data['subtitle'] = '';
 	$data['content'] = '';
-}
+  }
 else
 {
 	
