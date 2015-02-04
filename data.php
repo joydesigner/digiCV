@@ -1,10 +1,10 @@
 <?php
 
-$viewpass = '1234';
+$viewpass = '';
 //password must larger than 3 digits. Blank means anyone can visit.
 $title = 'title';
 $subtitle = 'subtitle';
-$content = 'MarkDown';
+$content = 'My CV';
 
 $data['local'] = 1;
 
