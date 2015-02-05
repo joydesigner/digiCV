@@ -57,7 +57,7 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
   storage.bind($scope,'wpass');
   storage.bind($scope,'vpass');
   storage.bind($scope,'apass');
-  storage.bind($scope,'resume.content');
+    storage.bind($scope,'resume.content');
 
   var url = '';
   if( $scope.vpass && $scope.vpass.length > 3 ){
@@ -71,13 +71,13 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
   }
 
   $http.get(url).success(function( data ){
-      var oldcontent = data.content;
-      $scope.resume = data;
+//      var oldcontent = data.content;
       $scope.resume.admin_password = $scope.apass;
       $scope.resume.view_password = $scope.wpass;
-      if( oldcontent.length > 0  ) {
-          $scope.resume.content = oldcontent;
-      }
+      
+//      if( oldcontent.length > 0  ) {
+//          $scope.resume.content = oldcontent;
+//      }
     }); 
 
   $scope.save = function( item )
@@ -97,6 +97,8 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
         {
           $scope.apass = item.admin_password;
           $scope.wpass = item.view_password;
+          $scope.resume.content = item.content;
+
           ngNotify.set(data.notice,'success');
           
         }
