@@ -12,7 +12,6 @@ case 'update':
 
 function update(){
 $content = $_POST['content'];
-var_dump($content);
 }
 
 
