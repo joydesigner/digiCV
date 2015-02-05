@@ -1,11 +1,11 @@
-var deerResume = angular.module('jasonsCV', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
+var jasonsCV = angular.module('jasonsCV', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
 
 //var baseurl = 'http://cvbox.sinaapp.com/'; // 使用SAE托管简历数据
 var baseurl = 'data.php'; // 使用本地文件托管简历数据，本地模式下，不支持在线编辑
 
 
-deerResume.config(['$routeProvider','$locationProvider',
-  function($routeProvider,$locationProvider) {
+jasonsCV.config(['$routeProvider',
+  function($routeProvider) {
     $routeProvider.
       when('/admin', {
         templateUrl: 'admin.html',
@@ -18,11 +18,11 @@ deerResume.config(['$routeProvider','$locationProvider',
       otherwise({
         redirectTo: '/resume'
       });
-      $locationProvider.html5Mode(true);
+//      $locationProvider.html5Mode(true);
   }]);
 
 
-deerResume.controller('resumeCtrl', function ($scope,$http,storage) {
+jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
 
   storage.bind($scope,'vpass');
 
@@ -52,7 +52,7 @@ deerResume.controller('resumeCtrl', function ($scope,$http,storage) {
 
 });
 
-deerResume.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
+jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
 
   storage.bind($scope,'wpass');
   storage.bind($scope,'vpass');
@@ -71,11 +71,13 @@ deerResume.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
   }
 
   $http.get(url).success(function( data ){
-      var oldcontent = $scope.resume.content;
+      var oldcontent = data.content;
       $scope.resume = data;
       $scope.resume.admin_password = $scope.apass;
       $scope.resume.view_password = $scope.wpass;
-      if( oldcontent.length > 0  ) $scope.resume.content = oldcontent;
+      if( oldcontent.length > 0  ) {
+          $scope.resume.content = oldcontent;
+      }
     }); 
 
   $scope.save = function( item )
@@ -84,7 +86,7 @@ deerResume.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     ({
       method: 'POST',
       //url: baseurl+"?a=update&domain="+encodeURIComponent(window.location),
-      url: baseurl,
+      url: baseurl+"?a=update",
 
       data: $.param({'title':item.title,'subtitle':item.subtitle,'content':item.content,'view_password':item.view_password,'admin_password':item.admin_password}),
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
