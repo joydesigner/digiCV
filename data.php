@@ -5,16 +5,17 @@ $viewpass = '1234';
 $title = 'title';
 $subtitle = 'subtitle';
 $content = '';
-
-
 switch($_GET['a']) {
-    case 'update':
-        update();
+case 'update':
+    update();
 }
 
 function update(){
-    $content = $_POST['content'];
+$content = $_POST['content'];
+var_dump($content);
 }
+
+
 if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass'])== $viewpass )
   {
     $data['errno'] = '0';

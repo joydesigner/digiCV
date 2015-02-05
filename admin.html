@@ -1,61 +1,46 @@
 <div class="editor-box">
-<div class="row top">
+    <div class="row top">
   <div class="col-md-3 title">编辑简历</div>
   <div class="col-md-9 action"><a ng-href="#resume">Return Home</a></div>
-
-</div>  
-
-<div ng-show="resume.show==0" class="pad40">
- <center>
+</div>
+    <div ng-show="resume.show==0" class="pad40">
+    <center>
     <p>Return home, enter password and edit.</p>
  </center>   
 </div>
-
-<form role="form" ng-show="resume.show==1">
-
-<div class="settings form-inline">
-  <div class="form-group">
-    <input type="text" class="form-control" id="title" name="title" placeholder="Resume title" ng-model="resume.title">
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="resume subtitle" ng-model="resume.subtitle">
-  </div>
-  <div class="form-group">
-    <label for="admin_password">Manage Password</label>
-    <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Enter manage password" ng-model="resume.admin_password">
-  </div>
-
-  <div class="form-group">
-    <label for="view_password">view password</label>
-    <input type="password" class="form-control" id="view_password" name="view_password" placeholder="anyone can visit if blank" ng-model="resume.view_password">
-  </div>
-  
-  
-  <button type="submit" class="btn btn-default" ng-click="save(resume)">Save</button>
-
-
-</div>  
-
-
-
-<div class="row earea">
-   <div class="col-md-6">
-      <textarea class="editor" ng-model="resume.content" id="edit_area" >
-      </textarea>
-
-      
-   </div>
-   <div class="col-md-6">
-      <div class="preview yue" id="editor-preview" ng-bind-html="resume.content | wizMarkdownFltr"></div>
-   </div> 
-  </div> 
-</form> 
+    <form role="form" ng-show="resume.show==1">
+        <div class="settings form-inline">
+            <div class="form-group">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Resume title" ng-model="resume.title">
+      </div>
+            <div class="form-group">
+        <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="resume subtitle" ng-model="resume.subtitle">
+      </div>
+            <div class="form-group">
+        <label for="admin_password">Manage Password</label>
+        <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Enter manage password" ng-model="resume.admin_password">
+      </div>
+            <div class="form-group">
+        <label for="view_password">view password</label>
+        <input type="password" class="form-control" id="view_password" name="view_password" placeholder="anyone can visit if blank" ng-model="resume.view_password">
+      </div>
+            <button type="submit" class="btn btn-default" ng-click="save(resume)">Save</button>
+        </div>
+        <div class="row earea">
+            <div class="col-md-6">
+                <textarea class="editor" name="content" ng-model="resume.content" id="edit_area" ></textarea>
+            </div>
+            <div class="col-md-6">
+                <div class="preview yue" id="editor-preview" ng-bind-html="resume.content | wizMarkdownFltr"></div>
+            </div>
+        </div>
+    </form>
 </div>
 <script type="text/javascript">
-$(document).ready(function()
-  {
-    var h = $(window).height() - 135 + 'px';
-    $('#edit_area').css('height', h );
-    $('#editor-preview').css('height', h );
-  });
+    $(document).ready(function()
+      {
+        var h = $(window).height() - 135 + 'px';
+        $('#edit_area').css('height', h );
+        $('#editor-preview').css('height', h );
+      });
 </script>
