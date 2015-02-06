@@ -23,7 +23,9 @@ jasonsCV.config(['$routeProvider',
 jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     //store the password in the localstorage
     storage.bind($scope,'vpass');
-    $scope.resume.content
+    $http.get('content.html').success(function(data){
+        $scope.content = data;
+    });
     var url = '';
     if( $scope.vpass && $scope.vpass.length > 3 ){
         //url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
