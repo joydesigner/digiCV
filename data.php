@@ -2,38 +2,52 @@
 
 $viewpass = '1234';
 //password must larger than 3 digits. Blank means anyone can visit.
-$title = $_POST['title'];
-$subtitle = $_POST['subtitle'];
-$content = 'Content is here...';
+$viewpass = '1234';
+$title = '标题';
+$subtitle = '子标题';
+$content = '';
+$data['local']=1;
+$show = 0;
+
 switch($_GET['a']) {
-case 'update':
+    case 'update':
     update();
+    case 'show':
+    show();
+
+}
+
+function show(){
+    $show = 1;
 }
 
 function update(){
-$content = $_POST['content'];
+    //get content
+    $content = $_POST['content'];
+   //write to file
+   $file = "content.html";
+   file_put_contents($file,$content);
 }
 
+//compare the password
 
-if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass'])== $viewpass )
-  {
-    $data['errno'] = '0';
-    $data['show'] = 1;
-    $data['title'] = $title;
-    $data['subtitle'] = $subtitle;
-    $data['content'] = $content;
-    // 1 will show cog
-    $data['local'] = 1;
-  }
-else
+
+if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass']) != $viewpass )
 {
-    $data['errno'] = '1';
+	$data['errno'] = '0';
 	$data['show'] = 0;
 	$data['title'] = '';
 	$data['subtitle'] = '';
-	$data['content'] = '';
+	$data['content'] =  $_POST['content'];
 }
+else
+{
 
-
+	$data['errno'] = '0';
+	$data['show'] = 1;
+	$data['title'] = $title;
+	$data['subtitle'] = $subtitle;
+	$data['content'] = $content;
+}
 
 echo json_encode( $data );
