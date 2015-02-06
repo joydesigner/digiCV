@@ -2,9 +2,9 @@
 
 $viewpass = '1234';
 //password must larger than 3 digits. Blank means anyone can visit.
-$title = 'title';
-$subtitle = 'subtitle';
-$content = '';
+$title = $_POST['title'];
+$subtitle = $_POST['subtitle'];
+$content = 'Content is here...';
 switch($_GET['a']) {
 case 'update':
     update();

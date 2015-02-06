@@ -69,19 +69,21 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
       //url = baseurl+"?a=show&domain="+encodeURIComponent(window.location);
       url = baseurl;
   }
-
+//get data from data.php
   $http.get(url).success(function( data ){
-//      var oldcontent = data.content;
+      var oldcontent = data.content;
       $scope.resume.admin_password = $scope.apass;
       $scope.resume.view_password = $scope.wpass;
-      
-//      if( oldcontent.length > 0  ) {
-//          $scope.resume.content = oldcontent;
-//      }
+      if( oldcontent.length > 0  ) {
+          $scope.resume.content = oldcontent;
+      }
     }); 
-
+//save new content
   $scope.save = function( item )
   {
+      // put into the local storage if click the save
+    storage.bind($scope,'resume.content');
+      // sync with the data.php (local store)
     $http
     ({
       method: 'POST',
