@@ -7,5 +7,7 @@ Feature:
 2. Sync between backend and frontend
 3. Easy editing by using Markdown
 
+The project is still under developing...
+
 
 
