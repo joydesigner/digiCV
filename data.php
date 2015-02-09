@@ -1,8 +1,13 @@
 <?php
 //password must larger than 3 digits. Blank means anyone can visit.
 $file = "content.html";
-$psdFile = "psd.html";
-$viewpass = file_get_contents($psdFile);
+$psdFile = "psd.txt";
+try{
+    $viewpass = file_get_contents($psdFile);
+}catch(Exception $e){
+     echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
+
 if(!isset($viewpass)){
     $viewpass = '';
 }
@@ -23,25 +28,34 @@ switch($_GET['a']) {
 }
 
 function show(){
-    $show = 1;
+
+    if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass']) != $viewpass )
+    {
+        $show = 0;
+    }else{
+        $show = 1;
+    }
 }
 
 function update(){
-    //get content
-    $content = $_POST['content'];
+    //update content
+    $content = trim($_POST['content']);
+    file_put_contents($file,$content);
+
+    //update the password
     $adminpass= trim($_POST['admin_password']);
-    if(strlen($adminpass)>0&& $adminpass!= $viewpass){
+    var_dump($adminpass);
+    if(strlen($adminpass)>=4 && $adminpass!= $viewpass){
         //update the view pass
         $viewpass = $adminpass;
     }
    //write to file
-
    file_put_contents($psdFile,$adminpass);
-   file_put_contents($file,$content);
+
 }
 
 //compare the password
-if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass']) != $viewpass )
+if( strlen( $viewpass ) >=4 && trim($_REQUEST['vpass']) != $viewpass )
 {
 	$data['errno'] = '0';
 	$data['show'] = 0;

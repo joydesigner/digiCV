@@ -18,13 +18,12 @@
       </div>
             <div class="form-group">
         <label for="admin_password">Manage Password</label>
-        <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Enter new password if you want to change the password" ng-model="resume.admin_password" ngMinlength="4" ngMaxlength="8" ng-pattern="/^[a-zA-Z0-9]*$/">
+        <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Enter new password if you want to change the password" ng-model="resume.admin_password" ngMinlength="4" ngMaxlength="8" >
       </div>
             <div class="form-group">
         <label for="view_password">view password</label>
-        <input type="password" class="form-control" name="view_password" id="view_password" name="view_password" placeholder="Please enter at least 4 alphanumeric character as the password to view the CV." ng-model="resume.view_password" ngMinlength="4" ngMaxlength="8" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+        <input type="password" class="form-control" name="view_password" id="view_password" name="view_password" placeholder="Please enter at least 4 alphanumeric character as the password to view the CV." ng-model="resume.view_password" ngMinlength="4" ngMaxlength="8" >
          <span style="color:red" ng-show="adminForm.view_password.$dirty && adminForm.view_password.$invalid">
-         <span ng-show="adminForm.view_password.$error.required">Password is required to view the CV.</span>
   </span>
       </div>
             <button type="submit" class="btn btn-default" ng-click="save(resume)"  ng-disabled="adminForm.view_password.$dirty && adminForm.view_password.$invalid || adminForm.admin_password.$dirty && adminForm.admin_password.$invalid">Save</button>
