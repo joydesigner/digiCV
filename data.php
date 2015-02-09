@@ -1,6 +1,12 @@
 <?php
 //password must larger than 3 digits. Blank means anyone can visit.
-$viewpass = '1234';
+$file = "content.html";
+$psdFile = "psd.html";
+$viewpass = file_get_contents($psdFile);
+if(!isset($viewpass)){
+    $viewpass = '';
+}
+
 $adminpass = '';
 $title = "Jason's Online CV";
 $subtitle = 'Editable online CV easy to use';
@@ -29,7 +35,8 @@ function update(){
         $viewpass = $adminpass;
     }
    //write to file
-   $file = "content.html";
+
+   file_put_contents($psdFile,$adminpass);
    file_put_contents($file,$content);
 }
 
