@@ -1,6 +1,4 @@
 <?php
-
-$viewpass = '1234';
 //password must larger than 3 digits. Blank means anyone can visit.
 $viewpass = '1234';
 $title = "Jason's Online CV";
