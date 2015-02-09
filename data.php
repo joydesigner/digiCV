@@ -1,12 +1,7 @@
 <?php
 //password must larger than 3 digits. Blank means anyone can visit.
 
-$psdFile = "psd.txt";
-try{
-    $viewpass = file_get_contents($psdFile);
-}catch(Exception $e){
-     echo 'Caught exception: ',  $e->getMessage(), "\n";
-}
+
 
 if(!isset($viewpass)){
     $viewpass = '';
@@ -44,6 +39,12 @@ function update(){
     file_put_contents($file,$content);
 
     //update the password
+    $psdFile = "psd.txt";
+    try{
+        $viewpass = file_get_contents($psdFile);
+    }catch(Exception $e){
+         echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
     $adminpass= trim($_POST['admin_password']);
     var_dump($adminpass);
     if(strlen($adminpass)>=4 && $adminpass!= $viewpass){
