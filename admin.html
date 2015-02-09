@@ -8,7 +8,7 @@
     <p>Password is not entered or not valid. Please return home, enter the correct password and edit.</p>
     </center>
 </div>
-    <form role="form" ng-show="resume.show==1">
+    <form name="adminForm" role="form" ng-show="resume.show==1">
         <div class="settings form-inline">
             <div class="form-group">
         <input type="text" class="form-control" id="title" name="title" placeholder="Resume title" ng-model="resume.title">
@@ -18,13 +18,16 @@
       </div>
             <div class="form-group">
         <label for="admin_password">Manage Password</label>
-        <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Enter manage password" ng-model="resume.admin_password">
+        <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Enter new password if you want to change the password" ng-model="resume.admin_password" ngMinlength="4" ng-pattern="/^[a-zA-Z0-9]*$/">
       </div>
             <div class="form-group">
         <label for="view_password">view password</label>
-        <input type="password" class="form-control" id="view_password" name="view_password" placeholder="anyone can visit if blank" ng-model="resume.view_password">
+        <input type="password" class="form-control" name="view_password" id="view_password" name="view_password" placeholder="Please enter at least 4 alphanumeric character as the password to view the CV." ng-model="resume.view_password" ngMinlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+         <span style="color:red" ng-show="adminForm.view_password.$dirty && adminForm.view_password.$invalid">
+         <span ng-show="adminForm.view_password.$error.required">Password is required to view the CV.</span>
+  </span>
       </div>
-            <button type="submit" class="btn btn-default" ng-click="save(resume)">Save</button>
+            <button type="submit" class="btn btn-default" ng-click="save(resume)"  ng-disabled="adminForm.view_password.$dirty && adminForm.view_password.$invalid || adminForm.admin_password.$dirty && adminForm.admin_password.$invalid">Save</button>
         </div>
         <div class="row earea">
             <div class="col-md-6">
