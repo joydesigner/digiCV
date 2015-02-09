@@ -1,6 +1,6 @@
 <?php
 //password must larger than 3 digits. Blank means anyone can visit.
-$file = "content.html";
+
 $psdFile = "psd.txt";
 try{
     $viewpass = file_get_contents($psdFile);
@@ -39,6 +39,7 @@ function show(){
 
 function update(){
     //update content
+    $file = "content.html";
     $content = trim($_POST['content']);
     file_put_contents($file,$content);
 
