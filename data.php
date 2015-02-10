@@ -3,15 +3,13 @@
 
 
 
-if(!isset($viewpass)){
-    $viewpass = '';
-}
+$viewpass = '1234';
 
 $adminpass = '';
 $title = "Jason's Online CV";
 $subtitle = 'Editable online CV easy to use';
 $content = '';
-$data['local']=1;
+//$data['local']=1;
 $show = 0;
 
 switch($_GET['a']) {
@@ -24,9 +22,10 @@ switch($_GET['a']) {
 
 function show(){
 
-    if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass']) != $viewpass )
+    if( strlen( $viewpass ) > 0 && trim($_REQUEST['vpass']) == $viewpass )
     {
         $show = 0;
+       // $data['local']=2;
     }else{
         $show = 1;
     }
@@ -57,21 +56,21 @@ function update(){
 }
 
 //compare the password
-if( strlen( $viewpass ) >=4 && trim($_REQUEST['vpass']) != $viewpass )
+if( strlen( $viewpass ) >=4 && trim($_REQUEST['vpass']) == $viewpass )
 {
-	$data['errno'] = '0';
-	$data['show'] = 0;
-	$data['title'] = '';
-	$data['subtitle'] = '';
+	$data['errno'] = 0;
+	$data['show'] = $show;
+	$data['title'] = $title;;
+	$data['subtitle'] = $subtitle;
 	$data['content'] =  $_POST['content'];
 }
 else
 {
 
-	$data['errno'] = '0';
-	$data['show'] = 1;
-	$data['title'] = $title;
-	$data['subtitle'] = $subtitle;
+	$data['errno'] = 1;
+	$data['show'] = 0;
+	$data['title'] = '';
+	$data['subtitle'] = '' ;
 	$data['content'] = $content;
 }
 

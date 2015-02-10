@@ -1,14 +1,14 @@
 <div class="editor-box">
     <div class="row top">
   <div class="col-md-3 title">编辑简历</div>
-  <div class="col-md-9 action"><a ng-href="#resume">Return Home</a></div>
+  <div class="col-md-9 action"><a ng-click="refresh(resume)" ng-href="#resume">Return Home</a></div>
 </div>
-    <div ng-show="resume.show==0" class="pad40">
+    <div ng-show="resume.show" class="pad40">
     <center>
     <p>Password is not entered or not valid. Please return home, enter the correct password and edit.</p>
     </center>
 </div>
-    <form name="adminForm" role="form" ng-show="resume.show==1">
+    <form name="adminForm" role="form" ng-hide="resume.show">
         <div class="settings form-inline">
             <div class="form-group">
         <input type="text" class="form-control" id="title" name="title" placeholder="Resume title" ng-model="resume.title">

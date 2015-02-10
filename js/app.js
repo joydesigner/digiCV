@@ -36,16 +36,16 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
         url = baseurl+"?a=show";
     }
 
-
-
     $http.get(url).success(function( data ){
         $scope.resume = data;
-
+        console.log("show: "+$scope.resume.show);
+//        console.log("local:"+$scope.resume.local);
     });
+
     //save the password
     $scope.password = function( vpass ){
         $scope.vpass = vpass;
-//        indow.location.reload();
+        //indow.location.reload();
     }
 });
 
@@ -86,11 +86,15 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
         method: 'POST',
         //url: baseurl+"?a=update&domain="+encodeURIComponent(window.location),
         url: baseurl+"?a=update&vpass="+encodeURIComponent($scope.vpass),
+        responseType: 'json',
         data: $.param({'title':item.title,'subtitle':item.subtitle,'content':item.content,'view_password':item.view_password,'admin_password':item.admin_password}),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).success(
       function( data ){
         //$scope.notice('');
+          console.log("saved successfully");
+          console.log(data);
+          console.log(data.errno);
         if( data.errno == 0 )
         {
             $scope.apass = item.admin_password;
@@ -102,6 +106,7 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
         else
         {
             ngNotify.set(data.error,'error');
+            console.log("save has some errors");
         }
       }
     );
