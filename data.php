@@ -8,7 +8,7 @@ $viewpass = '1234';
 $adminpass = '';
 $title = "Online Testing";
 $subtitle = 'Editable online Testing easy to use';
-$content = '';
+$content = 'aaa';
 //$data['local']=1;
 $show = 0;
 

@@ -50,6 +50,33 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
         $scope.vpass = vpass;
         //indow.location.reload();
     }
+
+    $scope.pdf = function()
+    {
+        var doc = new jsPDF(),
+            specialElementHandlers = {
+            '.action-bar': function(element, renderer){
+                return true;
+            }
+        };
+        // Optional - set properties on the document
+        doc.setProperties({
+            title: 'PDF - CV',
+            subject: 'Contact me if you like this simple tool.',
+            author: 'Jason',
+            keywords: 'Auto generated from html, Online CV by Javascript',
+            creator: 'Jason'
+        });
+
+
+        doc.fromHTML($('#resume_body').get(0), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+
+        doc.save("cv.pdf");
+    }
+
 });
 
 jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
@@ -57,6 +84,66 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     storage.bind($scope,'vpass');
     storage.bind($scope,'apass');
     storage.bind($scope,'resume.content');
+
+    //config the notify
+    // Configuration options...
+
+    $scope.theme = 'pure';
+    $scope.themeOptions = ['pure', 'pastel', 'prime', 'pitchy'];
+
+    $scope.duration = 4000;
+    $scope.durationOptions = [
+        { id: 500, value: '500 ms' },
+        { id: 1000, value: '1000 ms' },
+        { id: 2000, value: '2000 ms' },
+        { id: 4000, value: '4000 ms' },
+        { id: 8000 , value: '8000 ms'}
+    ];
+
+    $scope.position = 'bottom';
+    $scope.positionOptions = ['bottom', 'top'];
+
+    $scope.defaultType = 'info';
+    $scope.defaultOptions = ['info', 'success', 'warn', 'error', 'grimace'];
+
+    $scope.sticky = false;
+    $scope.stickyOptions = [true, false];
+
+    // Configuration actions...
+
+    $scope.setDefaultType = function() {
+        ngNotify.config({
+            type: $scope.defaultType
+        });
+    };
+
+    $scope.setDefaultPosition = function() {
+        ngNotify.config({
+            position: $scope.position
+        });
+    };
+
+    $scope.setDefaultDuration = function() {
+        ngNotify.config({
+            duration: $scope.duration
+        });
+    };
+
+    $scope.setDefaultTheme = function() {
+        ngNotify.config({
+            theme: $scope.theme
+        });
+    };
+
+    $scope.setDefaultSticky = function() {
+        ngNotify.config({
+            sticky: $scope.sticky
+        });
+    };
+
+    $scope.dismissNotify = function() {
+        ngNotify.dismiss();
+    };
 
     var url = '';
     if( $scope.vpass && $scope.vpass.length > 3 ){
@@ -99,67 +186,15 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
             $scope.wpass = item.view_password;
             $scope.resume.content = item.content;
             console.log("item content is: "+item.content);
-            ngNotify.set(data.notice,'success');
+            ngNotify.set('Saved Successfully!','success');
       }
-    ).error(function(data, status, headers, config) {
+    ).error(function(data) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-            ngNotify.set(data.error,'error');
+            console.log("save post - failed data: "+data);
+            ngNotify.set('Save has some errors.','error');
             console.log("save has some errors");
         });
   };
 });
 
-// ============
-function makepdf()
-{
-    //post('http://pdf.ftqq.com',{'title':$('#drtitle').html(),'subtitle':$('#drsubtitle').html(),'content':$('#cvcontent').html(),'pdfkey':'jobdeersocool'});
-    $("#hform [name=title]").val($('#drtitle').html());
-    $("#hform [name=subtitle]").val($('#drsubtitle').html());
-    $("#hform [name=content]").val($('#cvcontent').html());
-    $("#hform [name=pdfkey]").val('jobdeersocool');
-    $("#hform").submit();
-}
-
-function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not specified.
-    var form = jQuery('<form/>', {
-        'id':'hform',
-        'method':method ,
-        'action':path,
-        'target':'_blank'
-    });
-
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            
-            var hiddenField = jQuery('<input/>', {
-            'type':'hidden' ,
-            'name':key,
-            'value':params[key]
-            });
-
-            form.appendChild(hiddenField);
-         }
-    }
-
-    form.submit();
-}
-
-
-function pdf()
-{
-  var doc = new jsPDF();
-  var specialElementHandlers = {
-  '.action-bar': function(element, renderer){
-      return true;
-    }
-  };
-
-  doc.fromHTML($('#resume_body').get(0), 15, 15, {
-    'width': 170, 
-    'elementHandlers': specialElementHandlers
-  });
-
-  doc.output("dataurlnewwindow");
-}
