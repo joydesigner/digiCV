@@ -6,8 +6,8 @@
 $viewpass = '1234';
 
 $adminpass = '';
-$title = "Jason's Online CV";
-$subtitle = 'Editable online CV easy to use';
+$title = "Online Testing";
+$subtitle = 'Editable online Testing easy to use';
 $content = '';
 //$data['local']=1;
 $show = 0;

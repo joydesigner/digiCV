@@ -23,8 +23,11 @@ jasonsCV.config(['$routeProvider',
 jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     //store the password in the localstorage
     storage.bind($scope,'vpass');
+    //get the cv content
     $http.get('content.html').success(function(data){
+        console.log("content data is:"+data);
         $scope.content = data;
+        data.show = 1;
     });
     var url = '';
     if( $scope.vpass && $scope.vpass.length > 3 ){
@@ -86,30 +89,24 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
         method: 'POST',
         //url: baseurl+"?a=update&domain="+encodeURIComponent(window.location),
         url: baseurl+"?a=update&vpass="+encodeURIComponent($scope.vpass),
-        responseType: 'json',
         data: $.param({'title':item.title,'subtitle':item.subtitle,'content':item.content,'view_password':item.view_password,'admin_password':item.admin_password}),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).success(
       function( data ){
         //$scope.notice('');
-          console.log("saved successfully");
-          console.log(data);
-          console.log(data.errno);
-        if( data.errno == 0 )
-        {
+            console.log("saved successfully");
             $scope.apass = item.admin_password;
             $scope.wpass = item.view_password;
             $scope.resume.content = item.content;
             console.log("item content is: "+item.content);
             ngNotify.set(data.notice,'success');
-        }
-        else
-        {
+      }
+    ).error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
             ngNotify.set(data.error,'error');
             console.log("save has some errors");
-        }
-      }
-    );
+        });
   };
 });
 
