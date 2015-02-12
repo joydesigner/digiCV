@@ -25,7 +25,7 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     storage.bind($scope,'vpass');
     //get the cv content
     $http.get('content.html').success(function(data){
-        console.log("content data is:"+data);
+        //console.log("content data is:"+data);
         $scope.content = data;
         data.show = 1;
     });
@@ -41,7 +41,7 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
 
     $http.get(url).success(function( data ){
         $scope.resume = data;
-        console.log("show: "+$scope.resume.show);
+        //console.log("show: "+$scope.resume.show);
 //        console.log("local:"+$scope.resume.local);
     });
 
@@ -158,7 +158,7 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     $http.get(url).success(function( data ){
         //check if user input any content into the amdin page
         var oldcontent = $scope.resume.content;
-        console.log("Old content is: "+oldcontent);
+        //console.log("Old content is: "+oldcontent);
         $scope.resume = data;
         $scope.resume.admin_password = $scope.apass;
         $scope.resume.view_password = $scope.wpass;
@@ -181,19 +181,19 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     }).success(
       function( data ){
         //$scope.notice('');
-            console.log("saved successfully");
+            //console.log("saved successfully");
             $scope.apass = item.admin_password;
             $scope.wpass = item.view_password;
             $scope.resume.content = item.content;
-            console.log("item content is: "+item.content);
+            //console.log("item content is: "+item.content);
             ngNotify.set('Saved Successfully!','success');
       }
     ).error(function(data) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-            console.log("save post - failed data: "+data);
+            //console.log("save post - failed data: "+data);
             ngNotify.set('Save has some errors.','error');
-            console.log("save has some errors");
+            //console.log("save has some errors");
         });
   };
 });
