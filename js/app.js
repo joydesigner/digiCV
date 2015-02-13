@@ -1,7 +1,7 @@
 var jasonsCV = angular.module('jasonsCV', ['ngRoute','wiz.markdown','ngNotify','angularLocalStorage']);
 var baseurl = 'data.php'; // use data.php to store the data
-
-
+var contentUrl = 'content.txt';
+var url = '';
 jasonsCV.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -23,14 +23,15 @@ jasonsCV.config(['$routeProvider',
 jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     //store the password in the localstorage
     storage.bind($scope,'vpass');
+
     //get the cv content
-    $http.get('content.html').success(function(data){
+    $http.get(contentUrl).success(function(data){
         //console.log("content data is:"+data);
-        $scope.content = data;
-        data.show = 1;
+        $scope.resume.content = data;
     });
-    var url = '';
-    if( $scope.vpass && $scope.vpass.length > 3 ){
+
+    //if will show the password input
+    if( $scope.vpass && $scope.vpass.length >= 4 ){
         //url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
         url = baseurl+"?a=show&vpass="+encodeURIComponent($scope.vpass);
     }
@@ -38,19 +39,21 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
         //url = baseurl+"?a=show&domain="+encodeURIComponent(window.location);
         url = baseurl+"?a=show";
     }
-
+    //get the title
     $http.get(url).success(function( data ){
+        console.log("get url executed");
         $scope.resume = data;
         //console.log("show: "+$scope.resume.show);
-//        console.log("local:"+$scope.resume.local);
+        console.log("title: "+data.title);
+        //console.log("local:"+$scope.resume.local);
     });
 
     //save the password
     $scope.password = function( vpass ){
         $scope.vpass = vpass;
-        //indow.location.reload();
     }
 
+    // pdf function
     $scope.pdf = function()
     {
         var doc = new jsPDF(),
@@ -79,6 +82,7 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
 
 });
 
+// start of admin controller
 jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     storage.bind($scope,'wpass');
     storage.bind($scope,'vpass');
@@ -144,9 +148,9 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     $scope.dismissNotify = function() {
         ngNotify.dismiss();
     };
+    // end of config of notify
 
-    var url = '';
-    if( $scope.vpass && $scope.vpass.length > 3 ){
+    if( $scope.vpass && $scope.vpass.length >=4 ){
         //url = baseurl+"?a=show&domain="+encodeURIComponent(window.location)+"&vpass="+encodeURIComponent($scope.vpass);
         url = baseurl+"?a=show&vpass="+encodeURIComponent($scope.vpass);
     }
@@ -157,15 +161,17 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     //get data from data.php
     $http.get(url).success(function( data ){
         //check if user input any content into the amdin page
-        var oldcontent = $scope.resume.content;
+
         //console.log("Old content is: "+oldcontent);
         $scope.resume = data;
         $scope.resume.admin_password = $scope.apass;
         $scope.resume.view_password = $scope.wpass;
+        $scope.resume.content = data.content;
+        console.log("Content is: "+data.content);
         // if there is some content then glue it with angular scope
-        if( oldcontent.length > 0  ) {
-            $scope.resume.content = oldcontent;
-        }
+//        if( oldcontent.length > 0  ) {
+//            $scope.resume.content = oldcontent;
+//        }
     });
 //save new content
   $scope.save = function( item )
@@ -196,5 +202,15 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
             //console.log("save has some errors");
         });
   };
+
+  // refresh the resume
+    $scope.refresh = function(resume){
+        console.log("click the return");
+        //get the cv content
+        $http.get(contentUrl).success(function(data){
+            //console.log("content data is:"+data);
+            $scope.content = data;
+        });
+    }
 });
 
