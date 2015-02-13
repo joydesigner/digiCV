@@ -27,7 +27,8 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     //get the cv content
     $http.get(contentUrl).success(function(data){
         //console.log("content data is:"+data);
-        $scope.resume.content = data;
+        $scope.content = data;
+        console.log("The resume content on resume page is: "+data);
     });
 
     //if will show the password input

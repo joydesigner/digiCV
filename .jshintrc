@@ -1,0 +1,12 @@
+{
+  "eqeqeq": true,
+  "curly": true,
+  "undef": true,
+  "unused": true,
+  "globals":{
+    "$": false,
+    "jQuery": false,
+    "angular": false
+  }
+
+}

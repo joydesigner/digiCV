@@ -45,11 +45,13 @@ if($show == 0){
 
 function update(){
     //update content
+    $file = 'content.txt';
+    $psdFile = "psd.txt";
     $content = trim($_POST['content']);
     file_put_contents($file,$content);
 
     //update the password
-    $psdFile = "psd.txt";
+
     try{
         $viewpass = file_get_contents($psdFile);
     }catch(Exception $e){
