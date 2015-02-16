@@ -161,19 +161,15 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
     }
     //get data from data.php
     $http.get(url).success(function( data ){
-        //check if user input any content into the amdin page
-
         //console.log("Old content is: "+oldcontent);
         $scope.resume = data;
         $scope.resume.admin_password = $scope.apass;
         $scope.resume.view_password = $scope.wpass;
         $scope.resume.content = data.content;
-        console.log("Content is: "+data.content);
-        // if there is some content then glue it with angular scope
-//        if( oldcontent.length > 0  ) {
-//            $scope.resume.content = oldcontent;
-//        }
+        console.log("Admin Content is: "+data.content);
     });
+
+
 //save new content
   $scope.save = function( item )
   {
@@ -210,7 +206,8 @@ jasonsCV.controller('adminCtrl', function ($scope,$http,storage,ngNotify) {
         //get the cv content
         $http.get(contentUrl).success(function(data){
             //console.log("content data is:"+data);
-            $scope.content = data;
+            $scope.content = $scope.resume.content;
+            console.log("refresh content is: "+ $scope.content);
         });
     }
 });
