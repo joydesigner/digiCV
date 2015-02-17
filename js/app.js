@@ -24,12 +24,7 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     //store the password in the localstorage
     storage.bind($scope,'vpass');
 
-    //get the cv content
-    $http.get(contentUrl).success(function(data){
-        //console.log("content data is:"+data);
-        $scope.content = data;
-        console.log("The resume content on resume page is: "+data);
-    });
+
 
     //if will show the password input
     if( $scope.vpass && $scope.vpass.length >= 4 ){
@@ -48,7 +43,13 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
         console.log("title: "+data.title);
         //console.log("local:"+$scope.resume.local);
     });
-
+    
+    //get the cv content
+    $http.get(contentUrl).success(function(data){
+        //console.log("content data is:"+data);
+        $scope.content = data;
+        console.log("The resume content on resume page is: "+data);
+    });
     //save the password
     $scope.password = function( vpass ){
         $scope.vpass = vpass;

@@ -5,8 +5,8 @@
 
 $viewpass = '1234';
 $adminpass = '';
-$title = "Online Testing";
-$subtitle = 'Editable online Testing easy to use';
+$title = "Your own online CV";
+$subtitle = 'Editable online CV easy to use';
 $file = 'content.txt';
 $content = file_get_contents($file);
 
