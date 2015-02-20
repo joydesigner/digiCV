@@ -79,7 +79,7 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
             'elementHandlers': specialElementHandlers
         });
 
-        doc.save("cv.pdf");
+        doc.save("jasonscv.pdf");
     }
 
 });
