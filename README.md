@@ -1,7 +1,7 @@
 # digiCV
 ### digiCV is an online resume which helps build CV online easy.
-+The application is built with Angular JS and PHP. 
-+The application will be migrate to MEAN(MongoDB, Express, AngularJS, and NodeJS)
++ The application is built with Angular JS and PHP. 
++ The application will be migrate to MEAN(MongoDB, Express, AngularJS, and NodeJS)
 
 Feature:
 1. Password protection on viewing the personal CV
