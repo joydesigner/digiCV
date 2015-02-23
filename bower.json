@@ -7,7 +7,7 @@
     "url": "https://github.com/joydesigner/digiCV.git"
   },
   "ignore": [
-    "**/.txt",
+    "**/.*",
     "node_modules",
     "bower/components",
     ".bowerrc",

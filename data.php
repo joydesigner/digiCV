@@ -5,8 +5,8 @@
 
 $viewpass = '1234';
 $adminpass = '';
-$title = "Your own online CV";
-$subtitle = 'Editable online CV easy to use';
+$title = "Jason's Online CV";
+$subtitle = "CV built by MEAN";
 $file = 'content.txt';
 $content = file_get_contents($file);
 
@@ -33,8 +33,8 @@ function show(){
 
 if($show == 0){
     $data['errno'] = 0;
-    $data['title'] = $title;;
-    $data['subtitle'] = $subtitle;
+   // $data['title'] = $_POST['title'];
+    //$data['subtitle'] = $_POST['subtitle'];
     $data['content'] =  $content;
 }else{
     $data['errno'] = 1;

@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="bower/components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower/components/ng-notify/dist/ng-notify.min.css">
+
+</head>
+<body>
+  <base href="" target="_blank" >
+  <!-- CV starts from here -->
+  <div ng-view id="resume_body"></div>
   <script src="bower/components/jquery/dist/jquery.min.js"></script>
   <script src="bower/components/angular/angular.min.js"></script>
   <script src="bower/components/angular-route/angular-route.min.js"></script>
@@ -22,17 +28,6 @@
   <script src="bower/components/angular-cookies/angular-cookies.min.js"></script>
   <script src="bower/components/angularLocalStorage/src/angularLocalStorage.js"></script>
   <script src="js/app.js"></script>
-</head>
-<body>
-  <base href="/" target="_blank" >
-  <!-- CV starts from here -->
-  <div ng-view id="resume_body"></div>
-  <!--<form action="http://pdf.ftqq.com" method="post" target="_blank" id="hform">-->
-    <!--<input type="hidden" name="title"/>-->
-    <!--<input type="hidden" name="subtitle"/>-->
-    <!--<input type="hidden" name="content"/>-->
-    <!--<input type="hidden" name="pdfkey"/>-->
-  <!--</form>  -->
 </body>
 
 </html>

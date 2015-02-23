@@ -6,7 +6,8 @@
   "globals":{
     "$": false,
     "jQuery": false,
-    "angular": false
+    "angular": false,
+    "jsPDF": false
   }
 
 }
