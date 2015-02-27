@@ -49,12 +49,17 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
     // pdf function
     $scope.pdf = function()
     {
-        var doc = new jsPDF();
-        var specialElementHandlers = {
-            '.action-bar': function(){
+        var specialElementHandlers =
+            function (element,renderer) {
                 return true;
-            }
-        };
+            };
+        var doc = new jsPDF();
+
+//        var specialElementHandlers = {
+//            '.action-bar': function(){
+//                return true;
+//            }
+//        };
         // Optional - set properties on the document
         doc.setProperties({
             title: 'PDF - CV',
@@ -65,12 +70,21 @@ jasonsCV.controller('resumeCtrl', function ($scope,$http,storage) {
         });
 
 
-        doc.fromHTML($('#resume_body').get(0), 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
+        doc.fromHTML(
+            $('#resume_body').html(),
+            15,
+            15,
+            {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            },
+            function(){
+                doc.save("jasonscv.pdf");
+            }
+        );
 
-        doc.save("jasonscv.pdf");
+
+//        doc.output("jasoncv.pdf");
     };
 
 });
